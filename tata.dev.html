@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:wb="http://open.weibo.com/wb">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -8,6 +8,7 @@
     <title>Simple</title>
     <link rel="shortcut icon" href="/static/favicon.png"/>
     <link rel="stylesheet" type="text/css" href="/main.css" />
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 <div class="main">
@@ -16,6 +17,7 @@
             <li><a href="/">home</a></li>
             <li><a href="/#/tags">tags</a></li>
             <li><a href="/#/archive">archive</a></li>
+			 
     	</ul>
     </div>
 	<div class="wrap-header">
@@ -30,7 +32,7 @@
 </div>
 <div class="entry" id="main">
 <!-- content -->
-<p>我爱开发系列，是基于热爱开发，共享开发，快捷开发为核心，为广大开发者提供一个平台。她他客户端是将微博、快捷音乐和阅读功能融为一体的DIY app。这个app将一直是一个开源并不断丰富功能的项目，让更多热爱开发的工程狮一起共同进步，共同成长（开源地址后期将在软件设置中公开出来）。</p>
+<p><wb:follow-button uid="5552005348" type="red_1" width="67" height="24" >关注Tata</wb:follow-button>我爱开发系列，是基于热爱开发，共享开发，快捷开发为核心，为广大开发者提供一个平台。她他客户端是将微博、快捷音乐和阅读功能融为一体的DIY app。这个app将一直是一个开源并不断丰富功能的项目，让更多热爱开发的工程狮一起共同进步，共同成长（开源地址后期将在软件设置中公开出来）。</p>
 <!-- content end -->
 </div>
 <br>
@@ -38,6 +40,11 @@
 <br>
 下载地址： <a href="./file/TataWeibo.apk">Tata客户端</a>
 <br>
+
+<br>
+<div style="float: right;">
+<wb:share-button addition="number" type="button" ralateUid="5552005348"></wb:share-button>
+</div>
     <div id="disqus_thread"></div>
 	<div class="footer">
 		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
