@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+      由于最近公司的重点项目进入白热化阶段，身为尊（KU）贵（BI）的程序猿，开启了996模式，因此搞自己项目的时间严重缩水，每天借着下班的海绵时间和戒掉单休发呆的空子，断断续续，坎坎坷坷的继续着Tata的成长。
+     值得庆幸的是，即使困难再大，也挡不住我火热的开发热情（此处哈哈半小时，恢复神态后再接着往下写）。终于，1.5版本的Tata与大家见面了，这个版本的她&他有两个重要的改进，一个是新浪开发应用的审核通过啦。也就是说，突破了新浪测试账号的限制，现在无需注册测试账号就可以直接使用Tata啦。。。~\(≧▽≦)/~啦啦啦。。。
+      另一个是【我爱阅读】板块的重大更新，支持GBK和UTF-8两种主流的编码模式，妈妈再也不用担心我看书出现乱码啦。而且界面优化了背景颜色，果断告别黑白世界。最最重要的是可以滑动分页阅读啦 ，底部更有百分比进度显示。
+      虽然Tata的功能还不是很完善，但是我会一直好好的照顾她，陪伴他成长。不忘初衷，她&他是一款开源的app，旨在让更多的热爱安卓，热爱开发的同道之士一起共同成长。让我们一起快乐的开发吧。。。
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<pre><code>  由于最近公司的重点项目进入白热化阶段，身为尊（KU）贵（BI）的程序猿，开启了996模式，因此搞自己项目的时间严重缩水，每天借着下班的海绵时间和戒掉单休发呆的空子，断断续续，坎坎坷坷的继续着Tata的成长。
+ 值得庆幸的是，即使困难再大，也挡不住我火热的开发热情（此处哈哈半小时，恢复神态后再接着往下写）。终于，1.5版本的Tata与大家见面了，这个版本的她&amp;他有两个重要的改进，一个是新浪开发应用的审核通过啦。也就是说，突破了新浪测试账号的限制，现在无需注册测试账号就可以直接使用Tata啦。。。~\(≧▽≦)/~啦啦啦。。。
+  另一个是【我爱阅读】板块的重大更新，支持GBK和UTF-8两种主流的编码模式，妈妈再也不用担心我看书出现乱码啦。而且界面优化了背景颜色，果断告别黑白世界。最最重要的是可以滑动分页阅读啦 ，底部更有百分比进度显示。
+  虽然Tata的功能还不是很完善，但是我会一直好好的照顾她，陪伴他成长。不忘初衷，她&amp;他是一款开源的app，旨在让更多的热爱安卓，热爱开发的同道之士一起共同成长。让我们一起快乐的开发吧。。。
+</code></pre>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "Tata.v1.5.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
